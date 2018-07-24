@@ -25,7 +25,6 @@
                 // разница между координатами мыши и координатами перетаскиваемого элемента.
                 var deltaX = startX - origX,
                     deltaY = startY - origY;
-
                 // Регистрация событий mouseup и mousemove
                 document.addEventListener("mousemove", moveHandler, true);
                 document.addEventListener("mouseup", upHandler, true);
@@ -36,6 +35,7 @@
                     // перемещаем элемент с учетом отступа от первоначального клика.
                     elementToDrag.style.left = (e.clientX - deltaX) + "px";
                     elementToDrag.style.top = (e.clientY - deltaY) + "px";
+					getCoordinate(e.clientX, e.clientY);
                 }
 
                 function upHandler(e) {
@@ -45,12 +45,17 @@
                     document.removeEventListener("mousemove", moveHandler, true);
                 }
             }
+			
+			function getCoordinate(x, y){
+				var coordinate = document.getElementById("coordinate");
+				coordinate.innerHTML = "X: " + x + ", Y: " + y;
+			}
         })()
     </script>
 </head>
 <body>
-	Перетаскивайте элемент
     <div id="elem" style="position: absolute; left: 100px; top: 100px; height: 50px; width: 50px; background-color: Green;">
     </div>
+	<p id="coordinate"></p>
 </body>
 </html>
